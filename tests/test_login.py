@@ -2,7 +2,7 @@ import pytest
 
 import pprint, requests, bs4, os
 
-def login_test():
+def test_login():
     mysession = requests.Session()
     redirect = 'https://localhost/'
     baseurl = 'https://sso.digikey.com'
