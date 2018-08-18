@@ -7,5 +7,5 @@ cache:
   directories:
   - .cachedata
 script:
-  - ./tests/test_login.py
+  - python tests/test_login.py
 
