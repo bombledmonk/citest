@@ -33,7 +33,13 @@ def test_login():
     print(loginAttempt.status_code)
     code = loginAttempt.headers["Location"].split('=')[1]
     print(code)
-
+    with open('.cachedata/cachetest.txt','w') as out:
+        out.write(code)
 
 if __name__ == "__main__":
     test_login()
+
+##TODO
+## make a file that stores something in cache
+## access something in cache
+## make test 
