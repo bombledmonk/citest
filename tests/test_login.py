@@ -32,9 +32,11 @@ def test_login():
 
     print(loginAttempt.status_code)
     code = loginAttempt.headers["Location"].split('=')[1]
-    print(code)
+    with open('.cachedata/cachetest.txt','r') as out:
+        print(out.readline)
     with open('.cachedata/cachetest.txt','w') as out:
         out.write(code)
+        print('new code',code)
 
 if __name__ == "__main__":
     test_login()
