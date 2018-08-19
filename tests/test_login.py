@@ -40,6 +40,7 @@ def test_login():
 
 if __name__ == "__main__":
     test_login()
+    assert False
 
 ##TODO
 ## make a file that stores something in cache
