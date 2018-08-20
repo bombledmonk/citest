@@ -17,6 +17,7 @@ CLIENT_ID = os.environ['CLIENT_ID']
 USERNAME = os.environ['USER_NAME']
 PASSWORD = os.environ['PASSWORD']
 CLIENT_SECRET = os.environ['CLIENT_SECRET']
+
 #
 
 
@@ -43,11 +44,6 @@ def full_login_flow():
 
     print(login_attempt.status_code)
     auth_code = login_attempt.headers["Location"].split('=')[1]
-    # with open('.cachedata/cachetest.txt', 'r') as out:
-    #     print(out.readline())
-    # with open('.cachedata/cachetest.txt', 'w') as out:
-    #     out.write(auth_code)
-    #     print('new auth_code', auth_code)
     auth_payload = {
         'grant_type': 'authorization_code',
         'code': auth_code,
@@ -113,12 +109,38 @@ def search(keyword, access_token, record_count=2):
     else:
         print('failed all attempts for ', keyword)
     print(req.json())
+    return req.json()
+
+
+def find_part_in_results(results, searched_part):
+    try:
+        for part in results["Parts"]:
+            if part.get("DigiKeyPartNumber") == searched_part:
+                return part
+        else:
+            log_failed_pns(searched_part, results)
+    except Exception as e:
+        print(e)
+        log_failed_pns(search)
+
+
+def log_failed_pns (searched_part):
+    print('failed to find ',searched_part, ' in results')
 
 ## check if token exists
 ## check if token works
 ## refresh token, then rewrite
 ## save into pn.json, add date, status
 ##
+
+def get_data(cache_folder, pnlist, refresh=False):
+    ## figure out how to timestamp data and only refresh if otherwise out of date
+    ## try to figure out how to maintain travis cache
+    if os.environ.get("CI") == True:
+        print ('library builder on travis')
+    else:
+        print('local build')
+
 
 
 if __name__ == "__main__":
@@ -128,6 +150,7 @@ if __name__ == "__main__":
         check_current_token(token)
     else:
         full_login_flow()
+    get_data('',[])
     # assert False
 
 ##TODO
