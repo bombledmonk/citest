@@ -64,7 +64,7 @@ def load_access_token(path,name):
         with open(os.path.join(path,name), 'r') as access_file:
             return json.load(access_file)
     except (FileNotFoundError, IOError):
-        print(path,name, 'does not exist')
+        print(os.path.join(path, name), 'does not exist')
         return False
 
 
