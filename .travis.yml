@@ -6,6 +6,8 @@ install:
 cache:
   directories:
   - .cachedata
+cache: pip
+
 script:
   - python tests/test_login.py
 
