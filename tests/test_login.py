@@ -136,7 +136,7 @@ def log_failed_pns (searched_part):
 def get_data(cache_folder, pnlist, refresh=False):
     ## figure out how to timestamp data and only refresh if otherwise out of date
     ## try to figure out how to maintain travis cache
-    if os.environ.get("CI") == True:
+    if os.environ.get("CI") == 'true':
         print ('library builder on travis')
     else:
         print('local build')
@@ -150,7 +150,7 @@ if __name__ == "__main__":
         check_current_token(token)
     else:
         full_login_flow()
-    get_data('',[])
+    get_data('',[] )
     # assert False
 
 ##TODO
