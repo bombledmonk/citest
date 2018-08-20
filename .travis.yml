@@ -9,6 +9,6 @@ cache:
 cache: pip
 
 script:
-  - ls .cachedata
+  - ls
   - python tests/test_login.py
 
