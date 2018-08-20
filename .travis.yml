@@ -9,6 +9,5 @@ cache:
 cache: pip
 
 script:
-  - mkdir .cachedata
   - python tests/test_login.py
 
