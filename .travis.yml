@@ -9,5 +9,6 @@ cache:
 cache: pip
 
 script:
+  - git clone https://github.com/digikey/digikey-kicad-library.git .cachedata/digikey-kicad-library
   - python test_login.py
 
