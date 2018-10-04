@@ -156,6 +156,7 @@ def get_data(cache_folder, pnlist, refresh=False):
 
 
 if __name__ == "__main__":
+    print('main function')
     token = load_access_token(CACHE_DIR,AUTH_TOKEN_FILENAME)
     print()
     if( token != False ):
@@ -165,6 +166,7 @@ if __name__ == "__main__":
         
     get_data('',['300-8254-6-ND', 'FNETHE025DKR-ND'] )
     # assert False
+    print('main finished')
 
 ##TODO
 ## make a file that stores something in cache
