@@ -9,5 +9,5 @@ cache:
 cache: pip
 
 script:
-  - python tests/test_login.py
+  - python test_login.py
 
