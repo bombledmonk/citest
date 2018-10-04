@@ -149,12 +149,39 @@ def get_data(cache_folder, pnlist, refresh=False):
         print ('library builder on travis')
         for i, pn in enumerate(pnlist):
             print(pn)
+        print(get_kicad_filelist(cache_folder+'/digikey-kicad-library/src/Source_Symbols'))
+
     else:
         print('local build')
         for i, pn in enumerate(pnlist):
             print(pn)
+        print(
+            get_kicad_filelist(
+                cache_folder +
+                '/digikey-kicad-library/src/Source_Symbols'))
         ##TODO START HERE!!!!!!!!!!!
 
+
+def get_kicad_filelist(infolder):
+    ret = []
+    nothandled = []
+    totalfilecount = 0
+    try:
+        for file in os.listdir(infolder):
+            totalfilecount += 1
+            filename = os.fsdecode(file)
+            if filename.endswith(".kicad_mod") or filename.endswith(
+                    ".dcm") or filename.endswith(".lib"):
+                ret.append(os.path.join(infolder, filename))
+            else:
+                nothandled.append(filename)
+        print('found ', len(ret), ' out of ', totalfilecount,
+              ' total files in ', infolder)
+        if len(nothandled) > 0:
+            print('\nthese files not handled \n', nothandled)
+        return ret
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
@@ -165,8 +192,8 @@ if __name__ == "__main__":
         check_current_token(token)
     else:
         full_login_flow()
-        
-    get_data('',['300-8254-6-ND', 'FNETHE025DKR-ND'] )
+
+    get_data(CACHE_DIR, ['300-8254-6-ND', 'FNETHE025DKR-ND'])
     # assert False
     print('main finished')
 
