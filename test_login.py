@@ -147,6 +147,8 @@ def get_data(cache_folder, pnlist, refresh=False):
     ## try to figure out how to maintain travis cache
     if os.environ.get("CI") == 'true':
         print ('library builder on travis')
+        for i, pn in enumerate(pnlist):
+            print(pn)
     else:
         print('local build')
         for i, pn in enumerate(pnlist):
