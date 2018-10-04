@@ -1,6 +1,6 @@
 import pytest
 
-import pprint, requests, bs4, os, json
+import pprint, requests, bs4, os, json, 
 from requests import RequestException
 
 
@@ -60,7 +60,7 @@ def load_access_token(path,name):
         with open(os.path.join(path,name), 'r') as access_file:
             return json.load(access_file)
     except (FileNotFoundError, IOError):
-        print(os.path.join(path, name), 'does not exist')
+        print(os.path.join(path, name), 'does not exist, error')
         return False
 
 
@@ -79,8 +79,14 @@ def save_access_token(path, name, tokens):
 
 
 def check_current_token(tokenjson):
+    res = search('p646-ND', tokenjson['access_token'])
+    part = find_part_in_results(res, 'P646-ND')
+    print(part)
+    if part != False:
+        return True
+    else:
+        return False
 
-    search('342', tokenjson['access_token'])
 
 
 def search(keyword, access_token, record_count=2):
@@ -108,7 +114,8 @@ def search(keyword, access_token, record_count=2):
             break
     else:
         print('failed all attempts for ', keyword)
-    print(req.json())
+    # print(req.json())
+    print(keyword, ' found')
     return req.json()
 
 
@@ -119,9 +126,11 @@ def find_part_in_results(results, searched_part):
                 return part
         else:
             log_failed_pns(searched_part, results)
+            return False
     except Exception as e:
         print(e)
         log_failed_pns(search)
+        return False
 
 
 def log_failed_pns (searched_part):
@@ -140,6 +149,9 @@ def get_data(cache_folder, pnlist, refresh=False):
         print ('library builder on travis')
     else:
         print('local build')
+        for i, pn in enumerate(pnlist):
+            print(pn)
+        ##TODO START HERE!!!!!!!!!!!
 
 
 
@@ -150,7 +162,8 @@ if __name__ == "__main__":
         check_current_token(token)
     else:
         full_login_flow()
-    get_data('',[] )
+        
+    get_data('',['300-8254-6-ND', 'FNETHE025DKR-ND'] )
     # assert False
 
 ##TODO
