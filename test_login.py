@@ -1,6 +1,6 @@
 import pytest
 
-import pprint, requests, bs4, os, json, 
+import pprint, requests, bs4, os, json
 from requests import RequestException
 
 
