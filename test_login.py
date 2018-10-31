@@ -7,6 +7,7 @@ from partkeys import InfoKeys
 from generate_files import *
 from libcheck import *
 from filehelpers import *
+from pathlib import Path
 
 
 
@@ -282,6 +283,9 @@ def get_data(cache_folder, symbol_data, token):
     ## figure out how to timestamp data and only refresh if otherwise out of date
     ## try to figure out how to maintain travis cache
     current_cache = load_json(cache_folder+'/website_data.json')
+    if Path('/website_data.json').exists():
+        if current_cache[pn].get('lastupdated') != None:
+            pass
 
     return_val = {}
     token = load_access_token(CACHE_DIR, AUTH_TOKEN_FILENAME)
@@ -289,8 +293,7 @@ def get_data(cache_folder, symbol_data, token):
 
     ## load cache file,  check cache file for part number, check last updated, make request for that part.
     for i, pn in enumerate(pnlist):
-        if current_cache[pn].get('lastupdated') != None:
-            pass 
+ 
         search_results = search(pn, token['access_token'], record_count=2)
         part = find_part_in_results(search_results, pn)
         single_part_dict = get_single_part_dict(part)
