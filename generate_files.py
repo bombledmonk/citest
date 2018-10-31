@@ -45,6 +45,7 @@ def generate_by_categories(d, outputfolder, refdesfile):
 
 
 def generate_by_families(d, outputfolder, refdesfile):
+    os.makedirs(os.path.dirname(outputfolder), exist_ok=True)
     bycat = split_into_fam_dicts(d)
     for key in bycat.keys():
         generate_lib(bycat[key], outputfolder, sanitize_family_name('dk_' + key), refdesfile)

@@ -351,6 +351,7 @@ if __name__ == "__main__":
     all_info = add_buildpn(all_info, k.mpn)
     check_metadata(all_info)
     generate_monlith(all_info, CACHE_DIR+'/monolith/', 'digikeyallparts', REFERENCE_DESIGNATORS)
+    generate_by_families(all_info, CACHE_DIR+'/test/', REFERENCE_DESIGNATORS)
 
 
 
