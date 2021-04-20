@@ -11,7 +11,7 @@ more-itertools==4.3.0
 natsort==5.4.1
 oauthlib==2.1.0
 pluggy==0.7.1
-py==1.5.4
+py==1.10.0
 pyparsing==2.2.2
 pytest==3.7.1
 requests==2.19.1
